@@ -1,0 +1,32 @@
+{
+  "name": "loadTime",
+  "query": "movingMedian(sitespeed_io.Production.pageSummary.*.*.webpagetest.eu-west-2-chrome.fios.data.median.firstView.loadTime,3)",
+  "displayFormat": {
+    "title": [
+      {
+        "match": "^.*pageSummary.([\\w\\d]*).*_([\\w\\d]*).*$",
+        "replace": "$1 :: $2"
+      },
+      {
+        "match": "_",
+        "replace": "."
+      }
+    ],
+    "units": "milliseconds"
+  },
+  "states": {
+    "RED": "($value >= 6000)",
+    "ORANGE": "($value >= 4000 AND $value < 6000)",
+    "GREEN": "($value < 4000)"
+  },
+  "alertConditions": {
+    "STATE_CHANGE": "($currentState != $previousState)",
+    "MAX_THRESHOLD_BREACH": "($currentValue >= 6000 AND $previousValue < 6000)"
+  },
+  "mail": {
+    "htmlTemplate": "./template/alert.html",
+    "toList": [ "test@testmail.com" ],
+    "ccList": [ "test@testmail.com" ],
+    "subject": "Graphite Notifier Alert"
+  }
+}

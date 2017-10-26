@@ -1,0 +1,25 @@
+{
+	"jobScheduler": {
+		"webConsoleEndPoint" : ":9000"
+	},
+	"alertExecutor": {
+		"alertSchedule": "@every 15m",
+		"alertFileLocation": "./alerts",
+		"graphite": {
+			"host": "http://localhost:8080",
+			"username": "guest",
+			"password": "guest"
+		},
+		"mail": {
+			"server": "mail.server.com:25",
+			"from": "Graphite Notifier <graphitenotifier@mydomain.com>"
+		}
+	},
+	"logging": {
+		"level": "debug",
+		"filePath": "./logs/graphite-notifier.log",
+		"maxSize": 1,
+		"maxBackups": 5,
+		"maxAge": 5
+	}
+}

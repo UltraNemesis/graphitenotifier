@@ -1,0 +1,87 @@
+<html>
+  <head>
+	
+  </head>
+<body>
+	<p>
+		<h1 style="width:100%; background-color:black; color:white">
+			{{.Subject}}
+		</h1>
+	</p>
+
+	<p>
+		<br />
+		<table border="1" style="width:40%;font-size:18px">
+			<tr>
+				<td style="background-color:black;color:white">
+					<b>Metric</b>
+				</td>
+				<td>
+					{{.Metric}}
+				</td>
+				<td style="background-color:black;color:white">
+					<b>Condition</b>
+				</td>
+				<td>
+					{{.Condition}}
+				</td>
+			</tr>
+		</table>
+
+		<br />
+		<br />
+
+		<h2>
+			Summary
+		</h2>
+
+		<table border="1" style="width:80%;display:block;font-size:18px">
+			<tr style="background-color:black;color:white;font-weight:bold">
+				<th>Web Page</th>
+				<th> {{.Metric}} (Previous)</th>
+				<th> {{.Metric}} (Current)</th>
+			</tr>
+			{{ range $page, $data := .Values }}
+			<tr>
+				<td style="width:50%"><a href="#" style="text-decoration:none;color:black"><b>{{ $page }}</b></a></td>
+
+				<td align="right" style="width:25%">
+					<table>
+						<tr>
+							<td style="font-weight:bold" align="center">
+								{{ index $data "$previousValue" }}
+							</td>
+							<td style="color:'white';background-color:{{ index $data "$previousState" }};width:50px">
+
+							</td>
+						</tr>
+					</table>
+
+				</td>
+				<td align="right" style="width:25%">
+					<table>
+						<tr>
+							<td style="font-weight:bold" align="center">
+								{{ index $data "$currentValue" }}
+							</td>
+							<td style="color:'white';background-color:{{ index $data "$currentState" }};width:50px">
+
+							</td>
+						</tr>
+					</table>
+
+
+				</td>
+			</tr>
+			{{ end }}
+		</table>
+		<br />
+
+		<br />
+
+	<p style="width:100%; background-color:black; color:white">
+		<i> Generated @ {{.DateTime}} </i>
+	</p>
+
+</body>
+</html>
